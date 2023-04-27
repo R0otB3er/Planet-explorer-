@@ -31,8 +31,9 @@ int game::doChap(int choice){
 }
 
         
-void game::planetToExplored(){
-
+void game::planetToExplored(int index){
+    exploredPlanets.push_back(unexploredPlanets(index));
+    unexploredPlanets.~vector(index);
 }
         
 void game::printPlanetOptions(){
@@ -44,4 +45,12 @@ void game::printPlanetOptions(){
         
 bool game::isAlive(){
     return ship.getCrew() > 0;
+}
+
+spaceship game::getShip(){
+    return ship;
+}
+
+void game::setShip(spaceship nShip){
+    ship = nShip;
 }

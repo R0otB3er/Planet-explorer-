@@ -25,13 +25,11 @@ class game{
         game();
         game(int); // fills the un explored planets vector with the given int of planets
         int doChap(int);
-        void planetToExplored();
+        void planetToExplored(int);
         void printPlanetOptions();
         bool isAlive();
-
-
-
-
+        void setShip();
+        spaceship getShip(spaceship);
 }
 
 

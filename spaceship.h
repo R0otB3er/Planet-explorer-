@@ -47,6 +47,6 @@ class spaceship {
         
         spaceship read(string); //takes a string and parses out information to make a spaceship
         
- //       friend ostream& operator<<(ostream& out, spaceship& ship);
+        friend ostream& operator<<(ostream& out, spaceship& ship);
 };
 #endif

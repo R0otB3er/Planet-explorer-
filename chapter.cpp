@@ -1,4 +1,11 @@
 #include "chapter.h"
+#include "option.h"
+#include "consequence.h"
+#include "condition.h"
+#include <vector>
+#include <string>
+#include <iostream>
+#include <fstream>
 
 chapter::chapter(){
     description = "";

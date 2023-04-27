@@ -14,6 +14,6 @@ class condition {
         int getCrewNeeded();
         void setCrewNeeded(int);
         bool pass(spaceship);
-   //     friend ostream& operator<<(ostream& out, condition cond);
+        friend ostream& operator<<(ostream& out, condition cond);
 };
 #endif

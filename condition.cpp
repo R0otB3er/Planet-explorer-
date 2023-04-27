@@ -1,5 +1,6 @@
 #include "condition.h"
 #include "spaceship.h"
+#include <iostream>
 
 condition::condition(){
     fuelNeeded = 0;

@@ -2,6 +2,8 @@
 #define CHAPTER_H
 
 #include "option.h"
+#include "consequence.h"
+#include "condition.h"
 #include <vector>
 #include <string>
 #include <iostream>

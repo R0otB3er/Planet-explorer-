@@ -138,7 +138,7 @@ void planet::printMini(){
     cout << "Name : " << name << endl;
     cout << "Hostility: " << hostility << endl;
     cout << "Cost: " << getFuelCost() << endl;
-    cout << TLDR;
+    cout << TLDR << endl;
 }
 
 ostream& operator<<(ostream& out, planet _planet){
