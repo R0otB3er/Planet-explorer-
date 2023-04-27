@@ -7,6 +7,8 @@ planet::planet() : chapter(){
     fuelcost = condition();
 }
 
+planet::~planet(){}
+
 planet::planet(int _chapNum){ 
     ifstream inFS;
     string stream;

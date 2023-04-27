@@ -14,6 +14,7 @@ class planet : public chapter{
         planet();
         planet(int); //opens a file with the given int and reads all of the information
         planet(string _name, string _TLDR, int cost, string des, vector<option>, int num);
+        ~planet();
         string getName();
         void setName(string);
         string getTLDR();

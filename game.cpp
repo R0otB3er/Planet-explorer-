@@ -30,6 +30,7 @@ int game::doChap(int choice){
     return 0;
 }
 
+game::~game(){}
         
 void game::planetToExplored(int index){
     exploredPlanets.push_back(unexploredPlanets(index));

@@ -24,6 +24,7 @@ class game{
     public:
         game();
         game(int); // fills the un explored planets vector with the given int of planets
+        ~game();
         int doChap(int);
         void planetToExplored(int);
         void printPlanetOptions();

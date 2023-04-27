@@ -12,6 +12,8 @@ condition::condition(int FNeed, int CNeed){
     crewNeeded = CNeed;
 }
 
+condition::~condition(){}
+
 int condition::getFuelNeeded(){
     return fuelNeeded;
 }

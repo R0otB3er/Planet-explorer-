@@ -12,10 +12,13 @@ chapter::chapter(){
     chapNum = -1;
 }
 
+chater::~chapter(){}
+
 chapter::chapter(int chapNum){
     ifstream inFS;
     string stream;
     int count = 0;
+    cout << "test";
 
     //checks to see if you can open the file
     try{
@@ -31,13 +34,13 @@ chapter::chapter(int chapNum){
          cout << excpt.what() << endl;
     }
 
-    getline(inFS,stream,'@');
-    options[count].setText(string); 
+   
 
         while(!inFS.eof()){
         condition cond_temp;
         consequence cons_temp;
-
+        getline(inFS,stream,'@');
+        options[count].setText(string); 
         
         inFS >> stream;
         if(stream == "if"){

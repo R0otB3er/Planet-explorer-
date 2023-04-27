@@ -1,5 +1,6 @@
 #include "option.h"
 
+//MOVED TO OPTION.H
 
 option::option(){
     text = "";

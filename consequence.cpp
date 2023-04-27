@@ -25,6 +25,8 @@ consequence::consequence(spaceship _ship,int chapNum){
     isShip = true;
 }
 
+consequence::~consequence(){}
+
 void consequence::setgetLose(bool GL){
     getLose = GL;
 }

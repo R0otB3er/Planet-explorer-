@@ -4,6 +4,7 @@
 using namespace std;
 
 dice::dice(){}
+dice::~dice(){}
 
 int dice::throwDice(int max){
     srand(time(NULL));

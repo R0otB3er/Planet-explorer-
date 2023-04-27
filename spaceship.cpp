@@ -2,6 +2,9 @@
 #include <string>
 #include <iostream>
 
+using namespace std;
+// MOVED TO CORRESPONDING .H FILE
+
 spaceship::spaceship(){
     name = "";
     fuel_capacity = 0;
@@ -11,11 +14,16 @@ spaceship::spaceship(){
 }
 
 spaceship::spaceship(string _name, int fuelCap,int crewCap){
+    cout << "test ";
     name = _name;
     fuel_capacity = fuelCap;
     crew_capacity = crewCap;
     fuel = fuelCap;
     crewNum = 0;
+}
+
+spaceship::~spaceship(){
+
 }
 
 void spaceship::setFuelCapacity(int fuelCap){

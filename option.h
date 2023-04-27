@@ -8,21 +8,77 @@
 
 class option{
     private:
-        string text;
+        std::string text;
         condition condition_o;
         consequence consequence_o;
 
     public:
         option();
-        option(string, condition, consequence);
-        option(string, consequence);
-        string getText();
-        void setText(string);
+        option(std::string, condition, consequence);
+        option(std::string, consequence);
+        ~option();
+        std::string getText();
+        void setText(std::string);
         condition getCondition();
         void setCondition(condition);
         consequence getConsequence();
         void setConsequence(consequence);
-        friend ostream& operator<<(ostream& out, option op);
+        friend std::ostream& operator<<(std::ostream& out, option op);
 };
+
+
+
+option::option(){
+    text = "";
+    condition_o;
+    consequence_o;
+}
+
+option::~option(){}
+
+option::option(std::string _text, condition cond, consequence cons){
+    text = _text;
+    condition_o = cond;
+    consequence_o = cons;
+}
+
+option::option(std::string _text, consequence cons){
+    text = _text;
+    condition_o;
+    consequence_o = cons;
+}
+
+std::string option::getText(){
+    return text;
+}
+
+void option::setText(std::string txt){
+    text = txt;
+}
+
+condition option::getCondition(){
+    return condition_o;
+}
+
+void option::setCondition(condition cond){
+    condition_o = cond;
+}
+
+consequence option::getConsequence(){
+    return consequence_o;
+}
+
+void option::setConsequence(consequence cons){
+    consequence_o = cons;
+}
+
+std::ostream& operator<<(std::ostream& out, option op){
+    out<< op.getText();
+    if(op.getCondition().getFuelNeeded() > 0 || op.getCondition().getCrewNeeded() > 0){
+        out << " ( " << op.getCondition() << " )";
+    }
+    return out;
+}
+
 
 #endif
