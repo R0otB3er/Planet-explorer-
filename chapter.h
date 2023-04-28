@@ -29,7 +29,7 @@ class chapter{
         int getChapterNum();
         void setChapterNum(int);
         int numOfOptions(); // returns the size of the vector
-        friend std::ostream& operator<<(std::ostream& out, const chapter chap);
+        friend std::ostream& operator<<(std::ostream& out, chapter chap);
 
 };
 
@@ -58,72 +58,76 @@ chapter::chapter(int chapNum){
 
 
     std::getline(inFS, description);
-    std::cout<< "grabbed description" << std:: endl;
     
    
 
         while(!inFS.eof()){
-        condition cond_temp;
-        consequence cons_temp;
-        getline(inFS,stream,'@');
-        options[count].setText(stream); 
-        
-        inFS >> stream;
-        if(stream == "if"){
+            condition cond_temp;
+            consequence cons_temp;
+            option op_temp;
+
             inFS >> stream;
-                if(stream == "fuel"){
-                    inFS >> stream;
-                    cond_temp.setFuelNeeded(stoi(stream));
-                    inFS >> stream;
-                }
+
+            std::getline(inFS,stream,'@');
+            op_temp.setText(stream); 
+        
+            inFS >> stream;
+            if(stream == "if"){
+                inFS >> stream;
+                    if(stream == "fuel"){
+                        inFS >> stream;
+                        cond_temp.setFuelNeeded(stoi(stream));
+                        inFS >> stream;
+                    }
+                    if(stream == "crew"){
+                        inFS >> stream;
+                        cond_temp.setCrewNeeded(stoi(stream));
+                        inFS >> stream;
+
+                    }
+            }
+
+            op_temp.setCondition(cond_temp);
+
+            if(stream == "add"){
+                inFS >> stream;
+                cons_temp.setgetLose(true);
                 if(stream == "crew"){
                     inFS >> stream;
-                    cond_temp.setCrewNeeded(stoi(stream));
+                    cons_temp.setChangeCrew(stoi(stream));
                     inFS >> stream;
-
                 }
-        }
-
-        options[count].setCondition(cond_temp);
-
-        if(stream == "add"){
-            inFS >> stream;
-            cons_temp.setgetLose(true);
-            if(stream == "crew"){
-                inFS >> stream;
-                cons_temp.setChangeCrew(stoi(stream));
-                inFS >> stream;
+                if(stream == "fuel"){
+                    inFS >> stream;
+                    cons_temp.setChangeFuel(stoi(stream));
+                    inFS >> stream;
+                }
             }
-            if(stream == "fuel"){
+
+            if(stream == "lose"){
                 inFS >> stream;
-                cons_temp.setChangeFuel(stoi(stream));
-                inFS >> stream;
+                cons_temp.setgetLose(false);
+                if(stream == "crew"){
+                    inFS >> stream;
+                    cons_temp.setChangeCrew(stoi(stream));
+                    inFS >> stream;
+                }
+                if(stream == "fuel"){
+                    inFS >> stream;
+                    cons_temp.setChangeFuel(stoi(stream));
+                    inFS >> stream;
+                }
             }
-        }
 
-        if(stream == "lose"){
-            inFS >> stream;
-            cons_temp.setgetLose(false);
-            if(stream == "crew"){
+            if(stream == "goto"){
                 inFS >> stream;
-                cons_temp.setChangeCrew(stoi(stream));
-                inFS >> stream;
+                cons_temp.setChapter(stoi(stream));
             }
-            if(stream == "fuel"){
-                inFS >> stream;
-                cons_temp.setChangeFuel(stoi(stream));
-                inFS >> stream;
-            }
-        }
 
-        if(stream == "goto"){
-            inFS >> stream;
-            cons_temp.setChapter(stoi(stream));
-        }
+            op_temp.setConsequence(cons_temp);
+            options.push_back(op_temp);
 
-        options[count].setConsequence(cons_temp);
-
-        count++;
+            count++;
     }
 } 
 
@@ -185,11 +189,11 @@ int chapter::numOfOptions(){
     return options.size();
 }
 
-std::ostream& operator<<(std::ostream& out, const chapter chap){
-    out << chap.getDescription() << std::endl << std::endl;
-    std::cout << "here?";
+std::ostream& operator<<(std::ostream& out, chapter chap){
+    out << chap.getDescription() << std::endl;
     for(int i = 0; i < chap.numOfOptions(); i++){
-        out << i << "]  " << chap.getOption(i) << std::endl;
+        out << std::endl << i << ")  ";
+        chap.getOption(i).print();
     }
     return out;
 }

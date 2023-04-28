@@ -2,6 +2,8 @@
 #include "spaceship.h"
 #include <iostream>
 
+// MOVED TO UNDER .H FILE DUE TO COMPILTER BS
+
 condition::condition(){
     fuelNeeded = 0;
     crewNeeded = 0;

@@ -148,7 +148,7 @@ std::ostream& operator<<(std::ostream& out, consequence cons){
     }
 
     if(cons.getChangeCrew() > 0){
-        out  << cons.getChangeCrew() << " crewMembers ";
+        out  << cons.getChangeCrew() << " crew Members ";
     }
     
     if(cons.getChangeFuel() > 0){
@@ -158,6 +158,9 @@ std::ostream& operator<<(std::ostream& out, consequence cons){
     if(cons.isAShip()){
         out << cons.getShip().getName() << " " << cons.getShip().fuelR() << " " << cons.getShip().crewR();
     }
+
+    out << "then  go to chapter " << cons.getChapter();
+
     return out;
 }
 

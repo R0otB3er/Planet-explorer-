@@ -1,5 +1,7 @@
 #include "consequence.h"
 
+// MOVED TO UNDER .H FILE DUE TO COMPILTER BS
+
 consequence::consequence(){
     NextChapter = 0;
     changeCrew = 0;

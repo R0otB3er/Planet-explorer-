@@ -17,6 +17,7 @@ class option{
         option(std::string, condition, consequence);
         option(std::string, consequence);
         ~option();
+        void print();
         std::string getText();
         void setText(std::string);
         condition getCondition();
@@ -72,11 +73,20 @@ void option::setConsequence(consequence cons){
     consequence_o = cons;
 }
 
+void option::print(){
+    std::cout<< text;
+    if(condition_o.getFuelNeeded() > 0 || condition_o.getCrewNeeded() > 0){
+        std::cout << " (" << condition_o << ") ";
+    }
+    std::cout << consequence_o;
+}
+
 std::ostream& operator<<(std::ostream& out, option op){
     out<< op.getText();
     if(op.getCondition().getFuelNeeded() > 0 || op.getCondition().getCrewNeeded() > 0){
         out << " ( " << op.getCondition() << " )";
     }
+    out << op.getConsequence();
     return out;
 }
 

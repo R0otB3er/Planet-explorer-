@@ -46,6 +46,7 @@ void option::setConsequence(consequence cons){
 
 ostream& operator<<(ostream& out, option op){
     out<< op.getText();
-    out << " ( " << op.getCondition() << " )";
+    out << " (" << op.getCondition() << ") ";
+    out << op.getConsequence();
     return out;
 }

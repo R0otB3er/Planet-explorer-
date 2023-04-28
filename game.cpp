@@ -3,7 +3,7 @@
 #include "condition.h"
 #include "consequence.h"
 #include "dice.h"
-#include "option"
+#include "option.h"
 #include "spaceship.h"
 #include "planet.h"
 #include <iostream>
@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 
+/*
 using namespace std;
 
 game::game(){}
@@ -55,3 +56,4 @@ spaceship game::getShip(){
 void game::setShip(spaceship nShip){
     ship = nShip;
 }
+*/
