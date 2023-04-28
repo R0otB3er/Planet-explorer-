@@ -20,10 +20,12 @@ class chapter{
         chapter(int);
         chapter(std::string, std::vector<option>, int);
         ~chapter();
+        void setChapter(int);
+        void emptyChapter();
         option getOption(int);
-        void addOption(option); // should add a option after the last option...i dont think i did it right
+        void addOption(option); 
         void addBlankOption(); // should add a blank option after the last option that is blank
-        void removeOption(int);
+        //void removeOption(int);
         std::string getDescription();
         void setDescription(std::string);
         int getChapterNum();
@@ -48,7 +50,11 @@ chapter::chapter(int chapNum){
 
     //checks to see if you can open the file
     try{
-        inFS.open("chap/" + std::to_string(chapNum) + ".txt");
+        if( chapNum < 10){
+            inFS.open("chap/30,0" + std::to_string(chapNum) + ".txt");
+        }else{
+            inFS.open("chap/30," + std::to_string(chapNum) + ".txt");
+        }
         if(!inFS.is_open()){
             throw std::runtime_error("No File");
         }
@@ -139,12 +145,113 @@ chapter::chapter(std::string _text, std::vector<option> ops, int num){
     }
 }
 
+//works the same as the constructor 
+void chapter::setChapter(int num){
+    std::ifstream inFS;
+    std::string stream;
+    int count = 0;
+
+    //checks to see if you can open the file
+    try{
+        if( chapNum < 10){
+            inFS.open("chap/30,0" + std::to_string(chapNum) + ".txt");
+        }else{
+            inFS.open("chap/30," + std::to_string(chapNum) + ".txt");
+        }
+        if(!inFS.is_open()){
+            throw std::runtime_error("No File");
+        }
+    }catch(std::runtime_error& excpt){
+        std::cout << excpt.what() << std::endl;
+    }
+
+
+    std::getline(inFS, description);
+    
+   
+
+        while(!inFS.eof()){
+            condition cond_temp;
+            consequence cons_temp;
+            option op_temp;
+
+            inFS >> stream;
+
+            std::getline(inFS,stream,'@');
+            op_temp.setText(stream); 
+        
+            inFS >> stream;
+            if(stream == "if"){
+                inFS >> stream;
+                    if(stream == "fuel"){
+                        inFS >> stream;
+                        cond_temp.setFuelNeeded(stoi(stream));
+                        inFS >> stream;
+                    }
+                    if(stream == "crew"){
+                        inFS >> stream;
+                        cond_temp.setCrewNeeded(stoi(stream));
+                        inFS >> stream;
+
+                    }
+            }
+
+            op_temp.setCondition(cond_temp);
+
+            if(stream == "add"){
+                inFS >> stream;
+                cons_temp.setgetLose(true);
+                if(stream == "crew"){
+                    inFS >> stream;
+                    cons_temp.setChangeCrew(stoi(stream));
+                    inFS >> stream;
+                }
+                if(stream == "fuel"){
+                    inFS >> stream;
+                    cons_temp.setChangeFuel(stoi(stream));
+                    inFS >> stream;
+                }
+            }
+
+            if(stream == "lose"){
+                inFS >> stream;
+                cons_temp.setgetLose(false);
+                if(stream == "crew"){
+                    inFS >> stream;
+                    cons_temp.setChangeCrew(stoi(stream));
+                    inFS >> stream;
+                }
+                if(stream == "fuel"){
+                    inFS >> stream;
+                    cons_temp.setChangeFuel(stoi(stream));
+                    inFS >> stream;
+                }
+            }
+
+            if(stream == "goto"){
+                inFS >> stream;
+                cons_temp.setChapter(stoi(stream));
+            }
+
+            op_temp.setConsequence(cons_temp);
+            options.push_back(op_temp);
+
+            count++;
+    }
+}
+
+void chapter::emptyChapter(){
+    description = "";
+    chapNum = -1;
+    options.clear();
+}
+
 option chapter::getOption(int index){ // STARTS AT 0!!!!
     try{
         if(index > options.size()){
             throw std::runtime_error("invalid index");
         }
-         return options.at(index); 
+        return options.at(index); 
     }
     catch(std::runtime_error& excpt){
         std::cout << excpt.what() << std::endl;
@@ -156,7 +263,7 @@ option chapter::getOption(int index){ // STARTS AT 0!!!!
 void chapter::addOption(option op){
     options.push_back(op);
 }
-
+/*
 void chapter::removeOption(int index){
     try{
         if(index > options.size()){
@@ -168,6 +275,7 @@ void chapter::removeOption(int index){
         std::cout << excpt.what() << std::endl;
     }
 }
+*/
         
 std::string chapter::getDescription(){
     return description;

@@ -1,0 +1,8 @@
+planet 1
+planet 1 is for test this text in in the TLDR
+5
+10
+longer description of planet 1
+option 1 @ goto -1
+option 2 @ goto -1
+option 3 @ goto -1
