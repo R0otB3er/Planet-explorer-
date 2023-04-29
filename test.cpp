@@ -14,7 +14,8 @@ int main(){
     game testGame;
     int choice;
     string stream;
-    chapter testing(1);
+    chapter doodoo(1);
+    
 
     //printDecal();
     //printTitle();
@@ -31,14 +32,19 @@ int main(){
     cout << "> ";
     cin >> stream;
     choice = stoi(stream);
-    
-    testGame.getCurrent().setChapter(testGame.doPlanet(choice));
 
-    cout << testing;
-    
+    testGame.changeCurChap(testGame.doPlanet(choice));
+
     testGame.printCurrent();
-    
 
+    cout << "> ";
+    cin >> stream;
+    choice = stoi(stream);
+
+    testGame.changeCurChap(testGame.doChap(choice));
+
+    cout << testGame.getShip();
+    testGame.printCurrent();
 
     return 0;
 }

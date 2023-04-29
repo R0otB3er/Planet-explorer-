@@ -45,6 +45,10 @@ game::game(){ // base level of planet options is 4
         planet temp(i);
         unexploredPlanets.push_back(temp);
     }
+    current = chapter();
+    currPlanet = planet();
+    ship = spaceship("standard issue star explorer", 20, 10);
+    ship.setCrew(5);
 }
 
 game::game(int numOfPlanets){} // if i want to have more or less planet options
@@ -56,7 +60,9 @@ int game::doChap(int choice){
         if(current.getOption(choice).getCondition().pass(ship)){
             current.getOption(choice).getConsequence().applyToShip(ship);
             return current.getOption(choice).getConsequence().getChapter();
-        }   
+        } else {
+            std::cout << "you are missing something!" << endl;
+        }  
     } else {
         std::cout << "invalid option" << std::endl;
         return 0;
@@ -79,7 +85,7 @@ int game::doPlanet(int choice){
 
 void game::changeCurChap(int _chapNum){
     chapter nchap;
-    if(_chapNum > 0){
+    if(_chapNum >= 0){
         nchap.setChapter(_chapNum);
     } 
     current = nchap;
@@ -129,13 +135,18 @@ bool game::choosePlanet(int index){
 bool game::isAlive(){
     return ship.getCrew() > 0;
 }
-
+//cant print from here??
 chapter game::getCurrent(){
     return current;
 }
-
+// not working
 void game::printCurrent(){
-    std:: cout << current;
+    std::cout << current.getDescription() << std::endl;
+    
+    for(int i = 0; i < current.numOfOptions(); i++){
+        std::cout << std::endl << i << ")  ";
+        current.getOption(i).print();
+    }
 }
 
 planet game::getPlanet(int choice){

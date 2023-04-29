@@ -73,10 +73,12 @@ chapter::chapter(int chapNum){
             consequence cons_temp;
             option op_temp;
 
-            inFS >> stream;
-
             std::getline(inFS,stream,'@');
-            op_temp.setText(stream); 
+            if(count == 0){
+                op_temp.setText(stream); 
+            } else {
+                op_temp.setText(stream.substr(1,stream.length() - 2)); 
+            }
         
             inFS >> stream;
             if(stream == "if"){
@@ -148,6 +150,7 @@ chapter::chapter(std::string _text, std::vector<option> ops, int num){
 
 //works the same as the constructor 
 void chapter::setChapter(int num){
+    
     std::ifstream inFS;
     std::string stream;
     int count = 0;
@@ -240,10 +243,11 @@ void chapter::setChapter(int num){
 
             op_temp.setConsequence(cons_temp);
             options.push_back(op_temp);
-            std::cout << options.at(count) << std::endl;
+            //std::cout << options.at(count) << std::endl;
 
             count++;
     }
+    
 }
 
 void chapter::emptyChapter(){
@@ -307,8 +311,9 @@ int chapter::numOfOptions(){
 std::ostream& operator<<(std::ostream& out, chapter chap){
     out << chap.getDescription() << std::endl;
     for(int i = 0; i < chap.numOfOptions(); i++){
-        out << std::endl << i << ")  ";
+        out  << i << ")  ";
         chap.getOption(i).print();
+        out << std::endl;
     }
     return out;
 }
