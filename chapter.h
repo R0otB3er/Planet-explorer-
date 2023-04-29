@@ -52,6 +52,7 @@ chapter::chapter(int chapNum){
     try{
         if( chapNum < 10){
             inFS.open("chap/30,0" + std::to_string(chapNum) + ".txt");
+            //cout << "chap/30,0" << std::to_string(chapNum) << ".txt";
         }else{
             inFS.open("chap/30," + std::to_string(chapNum) + ".txt");
         }
@@ -153,10 +154,12 @@ void chapter::setChapter(int num){
 
     //checks to see if you can open the file
     try{
-        if( chapNum < 10){
-            inFS.open("chap/30,0" + std::to_string(chapNum) + ".txt");
+        if( num < 10){
+            inFS.open("chap/30,0" + std::to_string(num) + ".txt");
+            //cout << "chap/30,0" << std::to_string(num) << ".txt";
         }else{
-            inFS.open("chap/30," + std::to_string(chapNum) + ".txt");
+            inFS.open("chap/30," + std::to_string(num) + ".txt");
+            //cout << "chap/30," << std::to_string(num) << ".txt";
         }
         if(!inFS.is_open()){
             throw std::runtime_error("No File");
@@ -167,7 +170,7 @@ void chapter::setChapter(int num){
 
 
     std::getline(inFS, description);
-    
+    //std::cout << description << endl;
    
 
         while(!inFS.eof()){
@@ -175,10 +178,12 @@ void chapter::setChapter(int num){
             consequence cons_temp;
             option op_temp;
 
-            inFS >> stream;
-
             std::getline(inFS,stream,'@');
-            op_temp.setText(stream); 
+            if(count == 0){
+                op_temp.setText(stream); 
+            } else {
+                op_temp.setText(stream.substr(1,stream.length() - 2)); 
+            }
         
             inFS >> stream;
             if(stream == "if"){
@@ -235,6 +240,7 @@ void chapter::setChapter(int num){
 
             op_temp.setConsequence(cons_temp);
             options.push_back(op_temp);
+            std::cout << options.at(count) << std::endl;
 
             count++;
     }
@@ -263,6 +269,7 @@ option chapter::getOption(int index){ // STARTS AT 0!!!!
 void chapter::addOption(option op){
     options.push_back(op);
 }
+
 /*
 void chapter::removeOption(int index){
     try{

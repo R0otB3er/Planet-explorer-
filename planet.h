@@ -75,10 +75,13 @@ planet::planet(int _chapNum){
         consequence cons_temp;
         option op_temp;
 
-        inFS >> stream;
-
         std::getline(inFS,stream,'@');
-        op_temp.setText(stream); 
+        if(count == 0){
+            op_temp.setText(stream); 
+        } else {
+            op_temp.setText(stream.substr(1,stream.length() - 2)); 
+        }
+        
         
         inFS >> stream;
         

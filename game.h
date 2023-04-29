@@ -27,9 +27,13 @@ class game{
         ~game();
         void changeCurChap(int);
         int doChap(int);
+        int doPlanet(int);
         void planetToExplored(int);
         void printPlanetOptions();
         bool isAlive();
+        chapter getCurrent();
+        void printCurrent();
+        planet getPlanet(int);
         void setShip(spaceship);
         spaceship getShip();
         bool wasExplored(planet);
@@ -60,6 +64,19 @@ int game::doChap(int choice){
     return 0;
 }
 
+int game::doPlanet(int choice){
+    if(currPlanet.numOfOptions() - 1 >= choice  && choice >= 0){
+        if(currPlanet.getOption(choice).getCondition().pass(ship)){
+            currPlanet.getOption(choice).getConsequence().applyToShip(ship);
+            return currPlanet.getOption(choice).getConsequence().getChapter();
+        }   
+    } else {
+        std::cout << "invalid option" << std::endl;
+        return 0;
+    }
+    return 0;
+}
+
 void game::changeCurChap(int _chapNum){
     chapter nchap;
     if(_chapNum > 0){
@@ -68,13 +85,16 @@ void game::changeCurChap(int _chapNum){
     current = nchap;
     
 }
-
-        
+   
 void game::planetToExplored(int index){
     exploredPlanets.push_back(unexploredPlanets.at(index));
 }
 
 bool game::wasExplored(planet check){
+    if(exploredPlanets.empty()){
+        return false;
+    }
+
     for(int i = 0; i < unexploredPlanets.size(); i++){
         if(exploredPlanets.at(i).getName() == check.getName()){
             return true;
@@ -92,7 +112,7 @@ void game::printPlanetOptions(){
 }
 
 bool game::choosePlanet(int index){
-    if(!wasExplored(index) && index < unexploredPlanets.size() && index >= 0){
+    if(!wasExplored(unexploredPlanets.at(index)) && index < unexploredPlanets.size() && index >= 0){
         currPlanet = unexploredPlanets.at(index);
         exploredPlanets.push_back(currPlanet);
         return true;
@@ -108,6 +128,26 @@ bool game::choosePlanet(int index){
         
 bool game::isAlive(){
     return ship.getCrew() > 0;
+}
+
+chapter game::getCurrent(){
+    return current;
+}
+
+void game::printCurrent(){
+    std:: cout << current;
+}
+
+planet game::getPlanet(int choice){
+    try{
+        if(choice > unexploredPlanets.size() && choice < 0){
+            throw std::runtime_error("bad index");
+        }
+
+    } catch(std::runtime_error& excpt){
+        std::cout << excpt.what() << std::endl;
+    }
+    return unexploredPlanets.at(choice);
 }
 
 spaceship game::getShip(){
