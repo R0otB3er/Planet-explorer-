@@ -37,6 +37,7 @@ planet::planet() : chapter(){
 planet::~planet(){}
 
 planet::planet(int _chapNum){ 
+    fileNum = _chapNum;
     std::ifstream inFS;
     std::string stream;
     int count = 0;
@@ -44,9 +45,9 @@ planet::planet(int _chapNum){
 
     try{
         if( _chapNum < 10){
-            inFS.open("chap/20,0" + std::to_string(_chapNum) + ".txt");
+            inFS.open("chap/planet/0" + std::to_string(_chapNum) + ".txt");
         }else{
-            inFS.open("chap/20," + std::to_string(_chapNum) + ".txt");
+            inFS.open("chap/planet/" + std::to_string(_chapNum) + ".txt");
         }
 
         if(!inFS.is_open()){
@@ -151,7 +152,7 @@ planet::planet(int _chapNum){
 
 }
 
-planet::planet(std::string _name, std::string _TLDR, int cost, std::string des, std::vector<option> ops, int num): chapter(des,ops,num){
+planet::planet(std::string _name, std::string _TLDR, int cost, std::string des, std::vector<option> ops, int num): chapter(des,ops){
     name = _name;
     TLDR = _TLDR;
     fuelcost.setFuelNeeded(cost);

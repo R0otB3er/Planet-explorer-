@@ -14,22 +14,21 @@ class chapter{
     protected:
         std::vector<option> options; 
         std::string description;
-        int chapNum;
+        int fileNum;
     public:
         chapter();
         chapter(int);
-        chapter(std::string, std::vector<option>, int);
+        chapter(std::string, std::vector<option>);
         ~chapter();
         void setChapter(int);
         void emptyChapter();
         option getOption(int);
         void addOption(option); 
         void addBlankOption(); // should add a blank option after the last option that is blank
-        //void removeOption(int);
+        void removeOption(int);
         std::string getDescription();
         void setDescription(std::string);
-        int getChapterNum();
-        void setChapterNum(int);
+        int getFileNum();
         int numOfOptions(); // returns the size of the vector
         friend std::ostream& operator<<(std::ostream& out, chapter chap);
 
@@ -38,12 +37,13 @@ class chapter{
 
 chapter::chapter(){
     description = "";
-    chapNum = -1;
+    fileNum = -1;
 }
 
 chapter::~chapter(){}
 
 chapter::chapter(int chapNum){
+    fileNum = chapNum;
     std::ifstream inFS;
     std::string stream;
     int count = 0;
@@ -51,10 +51,10 @@ chapter::chapter(int chapNum){
     //checks to see if you can open the file
     try{
         if( chapNum < 10){
-            inFS.open("chap/30,0" + std::to_string(chapNum) + ".txt");
+            inFS.open("chap/events/0" + std::to_string(chapNum) + ".txt");
             //cout << "chap/30,0" << std::to_string(chapNum) << ".txt";
         }else{
-            inFS.open("chap/30," + std::to_string(chapNum) + ".txt");
+            inFS.open("chap/events/" + std::to_string(chapNum) + ".txt");
         }
         if(!inFS.is_open()){
             throw std::runtime_error("No File");
@@ -140,8 +140,7 @@ chapter::chapter(int chapNum){
     }
 } 
 
-chapter::chapter(std::string _text, std::vector<option> ops, int num){
-    chapNum = num;
+chapter::chapter(std::string _text, std::vector<option> ops){
     description = _text;
     for(int i = 0; i < ops.size(); i++){
         options.push_back(ops.at(i));
@@ -158,10 +157,10 @@ void chapter::setChapter(int num){
     //checks to see if you can open the file
     try{
         if( num < 10){
-            inFS.open("chap/30,0" + std::to_string(num) + ".txt");
+            inFS.open("chap/events/0" + std::to_string(num) + ".txt");
             //cout << "chap/30,0" << std::to_string(num) << ".txt";
         }else{
-            inFS.open("chap/30," + std::to_string(num) + ".txt");
+            inFS.open("chap/events/" + std::to_string(num) + ".txt");
             //cout << "chap/30," << std::to_string(num) << ".txt";
         }
         if(!inFS.is_open()){
@@ -252,7 +251,6 @@ void chapter::setChapter(int num){
 
 void chapter::emptyChapter(){
     description = "";
-    chapNum = -1;
     options.clear();
 }
 
@@ -274,19 +272,19 @@ void chapter::addOption(option op){
     options.push_back(op);
 }
 
-/*
+
 void chapter::removeOption(int index){
     try{
-        if(index > options.size()){
+        if(index > options.size() || index < 0){
             throw std::runtime_error("invalid index");
         }
- //       options.remove(index); // make a new class??
+        options.erase(options.begin() + index); // make a new class??
     }
     catch(std::runtime_error& excpt){
         std::cout << excpt.what() << std::endl;
     }
 }
-*/
+
         
 std::string chapter::getDescription(){
     return description;
@@ -295,13 +293,9 @@ std::string chapter::getDescription(){
 void chapter::setDescription(std::string text){
     description = text;
 }
-        
-int chapter::getChapterNum(){
-    return chapNum;
-}
-        
-void chapter::setChapterNum(int num){
-    chapNum = num;
+
+int chapter::getFileNum(){
+    return fileNum;
 }
 
 int chapter::numOfOptions(){

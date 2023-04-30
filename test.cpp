@@ -12,39 +12,42 @@ using namespace std;
 int main(){
 
     game testGame;
-    int choice;
-    string stream;
+    int choice = 0;
+    string throwAway;
     chapter doodoo(1);
     
 
     //printDecal();
     //printTitle();
     
-    testGame.printPlanetOptions();
-    cout << "> ";
-    cin >> stream;
-    choice = stoi(stream);
-    
-    testGame.choosePlanet(choice);
-    
-    cout << testGame.getPlanet(choice);
-    
-    cout << "> ";
-    cin >> stream;
-    choice = stoi(stream);
+    for(int loop = 0; loop < 4;loop++){
+        testGame.printPlanetOptions();
 
-    testGame.changeCurChap(testGame.doPlanet(choice));
+        testGame.changeCurPlanet(getOptionChoice());
 
-    testGame.printCurrent();
+        while(testGame.getCurPlanet().numOfOptions() != 0){
+            cout<<testGame.getCurPlanet();
 
-    cout << "> ";
-    cin >> stream;
-    choice = stoi(stream);
+            testGame.doPlanet(getOptionChoice());
+        
+            while(true){
+                int optionCheck = 0;
+                cout<<testGame.getCurrent();
+            
+                if(testGame.getCurrent().numOfOptions() == 0){
+                    cout << "Enter anyhing to continue" << endl;
+                    cin >>throwAway;
+                    break;
+                }
 
-    testGame.changeCurChap(testGame.doChap(choice));
+                while(optionCheck == 0){
+                    optionCheck = testGame.doChap(getOptionChoice());
+                }
 
-    cout << testGame.getShip();
-    testGame.printCurrent();
+                testGame.changeCurChap(optionCheck);
+            }
+        }
+    }
 
     return 0;
 }

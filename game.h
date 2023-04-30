@@ -19,25 +19,28 @@ class game{
         std::vector<planet> unexploredPlanets;
         std::vector<planet> exploredPlanets;
         chapter current;
-        planet currPlanet;
+        planet* currPlanet;
 
     public:
         game();
         game(int); // fills the un explored planets vector with the given int of planets
         ~game();
         void changeCurChap(int);
+        bool changeCurPlanet(int);
         int doChap(int);
-        int doPlanet(int);
+        void doPlanet(int);
         void planetToExplored(int);
         void printPlanetOptions();
         bool isAlive();
         chapter getCurrent();
+        planet getCurPlanet();
         void printCurrent();
         planet getPlanet(int);
         void setShip(spaceship);
         spaceship getShip();
         bool wasExplored(planet);
-        bool choosePlanet(int);
+        void printCurPlanet();
+
 };
 
 game::game(){ // base level of planet options is 4
@@ -46,7 +49,7 @@ game::game(){ // base level of planet options is 4
         unexploredPlanets.push_back(temp);
     }
     current = chapter();
-    currPlanet = planet();
+    currPlanet = new planet();
     ship = spaceship("standard issue star explorer", 20, 10);
     ship.setCrew(5);
 }
@@ -61,7 +64,7 @@ int game::doChap(int choice){
             current.getOption(choice).getConsequence().applyToShip(ship);
             return current.getOption(choice).getConsequence().getChapter();
         } else {
-            std::cout << "you are missing something!" << endl;
+            std::cout << "you are missing something!" << std::endl;
         }  
     } else {
         std::cout << "invalid option" << std::endl;
@@ -70,17 +73,16 @@ int game::doChap(int choice){
     return 0;
 }
 
-int game::doPlanet(int choice){
-    if(currPlanet.numOfOptions() - 1 >= choice  && choice >= 0){
-        if(currPlanet.getOption(choice).getCondition().pass(ship)){
-            currPlanet.getOption(choice).getConsequence().applyToShip(ship);
-            return currPlanet.getOption(choice).getConsequence().getChapter();
+void game::doPlanet(int choice){
+    if(currPlanet->numOfOptions() - 1 >= choice  && choice >= 0){
+        if(currPlanet->getOption(choice).getCondition().pass(ship)){
+            currPlanet->getOption(choice).getConsequence().applyToShip(ship);
+            changeCurChap(currPlanet->getOption(choice).getConsequence().getChapter());
+            currPlanet->removeOption(choice);
         }   
     } else {
         std::cout << "invalid option" << std::endl;
-        return 0;
     }
-    return 0;
 }
 
 void game::changeCurChap(int _chapNum){
@@ -117,10 +119,10 @@ void game::printPlanetOptions(){
     }
 }
 
-bool game::choosePlanet(int index){
+bool game::changeCurPlanet(int index){
     if(!wasExplored(unexploredPlanets.at(index)) && index < unexploredPlanets.size() && index >= 0){
-        currPlanet = unexploredPlanets.at(index);
-        exploredPlanets.push_back(currPlanet);
+        *currPlanet = unexploredPlanets.at(index);
+        exploredPlanets.push_back(*currPlanet);
         return true;
     } else if(wasExplored(index)){
         std::cout << "This Planet has already been Explored" << std::endl;
@@ -135,17 +137,22 @@ bool game::choosePlanet(int index){
 bool game::isAlive(){
     return ship.getCrew() > 0;
 }
-//cant print from here??
+
 chapter game::getCurrent(){
     return current;
 }
-// not working
+
+planet game::getCurPlanet(){
+    return *currPlanet;
+}
+
 void game::printCurrent(){
     std::cout << current.getDescription() << std::endl;
     
     for(int i = 0; i < current.numOfOptions(); i++){
-        std::cout << std::endl << i << ")  ";
+        std::cout << i << ")  ";
         current.getOption(i).print();
+        std::cout << std::endl; 
     }
 }
 
@@ -167,6 +174,10 @@ spaceship game::getShip(){
 
 void game::setShip(spaceship nShip){
     ship = nShip;
+}
+
+void game::printCurPlanet(){
+    std::cout << currPlanet;
 }
 
 #endif
