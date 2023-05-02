@@ -1,0 +1,3 @@
+you mine and synthesize the minerals into fuel for your ship
+continue mining @ add fuel 15 goto 10201
+stop mining @ add fuel 15 goto 1

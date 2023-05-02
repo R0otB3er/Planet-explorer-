@@ -2,12 +2,14 @@
 #define PLANET_H
 
 #include "chapter.h"
+#include "helper.h"
 
 class planet : public chapter{
     private:
         std::string name;
-        std::string TLDR;
-        condition fuelcost;
+        std::string TLDR; // shorter version of the description to be used when choosing a planet 
+        condition fuelcost; // how much fule it takes to get to that planet
+        consequence cost;
         int hostility;
 
     public:
@@ -19,8 +21,8 @@ class planet : public chapter{
         void setName(std::string);
         std::string getTLDR();
         void setTLDR(std::string);
-        int getFuelCost();
-        void setFuelCost(int);
+        consequence getFuelCost();
+        bool checkFuel(spaceship);
         int getHostility();
         void setHostility(int);
         void printMini(); // prints the name, hostility, fuelcost, and TLDR 
@@ -67,9 +69,12 @@ planet::planet(int _chapNum){
     inFS >> stream;
     fuel = stoi(stream);
     fuelcost.setFuelNeeded(fuel);
-    inFS >> stream;
+    cost.setgetLose(false);
+    cost.setChangeFuel(fuel);
+    std::getline(inFS, stream, '/');
 
     std::getline(inFS, description);
+    insert_nlines(description, 100);
     
     while(!inFS.eof()){
         condition cond_temp;
@@ -174,12 +179,12 @@ void planet::setTLDR(std::string _TLDR){
     TLDR = _TLDR;
 }
 
-int planet::getFuelCost(){
-    return fuelcost.getFuelNeeded();
+consequence planet::getFuelCost(){
+    return cost;
 }
 
-void planet::setFuelCost(int cost){
-    fuelcost.setFuelNeeded(cost);
+bool planet::checkFuel(spaceship ship){
+    return fuelcost.pass(ship);
 }
         
 int planet::getHostility(){
@@ -194,7 +199,7 @@ void planet::setHostility(int hos){
 void planet::printMini(){
     std::cout << "Name : " << name << std::endl;
     std::cout << "Hostility: " << hostility << std::endl;
-    std::cout << "Cost: " << getFuelCost() << std::endl;
+    std::cout << "Cost: " << fuelcost.getFuelNeeded() << std::endl;
     std::cout << TLDR << std::endl;
 }
 

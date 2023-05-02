@@ -1,6 +1,7 @@
 #ifndef CHAPTER_H
 #define CHAPTER_H
 
+#include "helper.h"
 #include "option.h"
 #include "consequence.h"
 #include "condition.h"
@@ -10,6 +11,7 @@
 #include <fstream>
 #include <stdexcept>
 
+
 class chapter{
     protected:
         std::vector<option> options; 
@@ -17,19 +19,19 @@ class chapter{
         int fileNum;
     public:
         chapter();
-        chapter(int);
+        chapter(int); // opens a file with the int given and reads in files to fill the chapter with information
         chapter(std::string, std::vector<option>);
         ~chapter();
         void setChapter(int);
-        void emptyChapter();
+        void emptyChapter(); // removes everything from the chapter
         option getOption(int);
-        void addOption(option); 
-        void addBlankOption(); // should add a blank option after the last option that is blank
+        void addOption(option); //unused
+        void addBlankOption(); //unused should add a blank option after the last option that is blank
         void removeOption(int);
         std::string getDescription();
         void setDescription(std::string);
         int getFileNum();
-        int numOfOptions(); // returns the size of the vector
+        int numOfOptions(); // returns the size of the option vector
         friend std::ostream& operator<<(std::ostream& out, chapter chap);
 
 };
@@ -37,7 +39,7 @@ class chapter{
 
 chapter::chapter(){
     description = "";
-    fileNum = -1;
+    fileNum = -99;
 }
 
 chapter::~chapter(){}
@@ -65,7 +67,7 @@ chapter::chapter(int chapNum){
 
 
     std::getline(inFS, description);
-    
+    insert_nlines(description, 100);
    
 
         while(!inFS.eof()){
@@ -172,6 +174,7 @@ void chapter::setChapter(int num){
 
 
     std::getline(inFS, description);
+    insert_nlines(description, 100);
     //std::cout << description << endl;
    
 
@@ -305,7 +308,7 @@ int chapter::numOfOptions(){
 std::ostream& operator<<(std::ostream& out, chapter chap){
     out << chap.getDescription() << std::endl;
     for(int i = 0; i < chap.numOfOptions(); i++){
-        out  << i << ")  ";
+        out  << i << "]  ";
         chap.getOption(i).print();
         out << std::endl;
     }

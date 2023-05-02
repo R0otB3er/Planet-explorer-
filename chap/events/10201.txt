@@ -1,0 +1,2 @@
+you hear a rumbling at the cave starts to collapse from all of the mining
+escape @ add crew -3 fuel 25 goto 10202

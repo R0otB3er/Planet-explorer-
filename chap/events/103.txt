@@ -1,0 +1,3 @@
+as your crew goes further into the cave the air gets more and more phosphorous and toxic
+continue forward @ goto 10301
+decide against venturing further @ goto 1

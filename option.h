@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream& out, option op){
     if(op.getCondition().getFuelNeeded() > 0 || op.getCondition().getCrewNeeded() > 0){
         out << " ( " << op.getCondition() << " )";
     }
-    out << op.getConsequence();
+    //out << op.getConsequence();
     return out;
 }
 

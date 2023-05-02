@@ -48,8 +48,6 @@ class spaceship {
         
         std::string crewR(); // crewNum/crew_capacity
         
-        //spaceship read(std::string); //takes a string and parses out information to make a spaceship
-        
         friend std::ostream& operator<<(std::ostream& out, spaceship& ship);
 };
 

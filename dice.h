@@ -1,3 +1,4 @@
+// did not have enough time to implement randomness to the game
 #ifndef DICE_H
 #define DICE_H
 #include <cstdlib>

@@ -1,7 +1,6 @@
-planet 1
-planet 1 is for test this text in in the TLDR
-5
+Erebos
+A desolate, mineral rich Planet that oddly shows signs of life.
 10
-longer description of planet 1
-option 1 @ goto 1
-option 2 @ goto 2
+25
+/A dark, rocky planet shrouded in a perpetual night, Erebos is orbited by a single moon that reflects a faint glow upon its surface. The planet is plagued by frequent volcanic activity and is covered in vast, labyrinthine cave systems filled with strange, phosphorescent plants and animals. Despite its inhospitable environment, Erebos is believed to hold large reserves of valuable minerals and ores.
+Explore the numerous Cave systems @ goto 1

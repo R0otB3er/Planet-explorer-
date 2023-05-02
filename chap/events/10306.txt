@@ -1,0 +1,4 @@
+the aliens stop and obviously laugh. on of the aliens step forwards and say "that is just how we see, we know how you talk. what do you want?" 
+minerals to help power our ship @ add fuel 25 goto 10307
+help adventuring the solar system @ add crew 4 goto 10308
+nothing we were just enjoying the cave and its life @ goto 10309

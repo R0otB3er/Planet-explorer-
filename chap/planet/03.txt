@@ -1,8 +1,7 @@
-planet 3
-planet 3 is for test this text in in the TLDR
-20
-3
-longer description of planet 3
-option 1 @ goto -1
-option 2 @ goto -1
-option 3 @ goto -1
+PLANET OF INTENSE DOOM
+ALL ADVENTURURES DIE HERE
+99999
+1
+/THE PLANET GIVES YOU TWO OPTIONS ON YOUR FATE
+DIEEEEEEEEE @ goto 03
+MAYBE NOT DIE @ goto 302

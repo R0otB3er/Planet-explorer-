@@ -1,8 +1,7 @@
-planet 2
-planet 2 is for test this text in in the TLDR
+Stygia
+an ancient civilization that was once thriving but now covered in black sand dunes
 7
 13
-longer description of planet 2
-option 1 @ goto -1
-option 2 @ goto -1
-option 3 @ goto -1
+/A barren, desolate planet covered in a layer of fine, black sand and dotted with towering monoliths, Stygia is believed to have once been home to a thriving civilization that mysteriously disappeared. The planet is also haunted by strange, otherworldly phenomena, such as sudden blackouts and unexplained electromagnetic disturbances. Despite the dangers, many explorers are drawn to Stygia in search of ancient artifacts and technologies.
+scan the dunes for anything interesting @ goto 2
+land by one of the many monoliths @ goto 22

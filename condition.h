@@ -4,8 +4,8 @@
 
 class condition {
     private:
-        int fuelNeeded;
-        int crewNeeded;
+        int fuelNeeded = 0;
+        int crewNeeded = 0;
     public:
         condition();
         condition(int, int);
@@ -46,6 +46,7 @@ void condition::setCrewNeeded(int CNeed){
     crewNeeded = CNeed;
 }
 
+// checks the ship to see if it passes the parameters of the condition
 bool condition::pass(spaceship ship){
     if((ship.getFuel() >= fuelNeeded) && (ship.getCrew() >= crewNeeded)){
         return true;

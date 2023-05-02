@@ -11,7 +11,7 @@ class consequence{
         int changeCrew;
         spaceship newShip;
         int NextChapter;
-        bool getLose;
+        bool getLose; // determines if the consequence will add or subtract from the ship, using negative numbers WILL counteract this
         bool isShip;
 
     public:
@@ -26,15 +26,12 @@ class consequence{
         int getChangeFuel();
         void setChangeCrew(int);
         int getChangeCrew();
-        void SetShip(spaceship);
+        void SetShip(spaceship); //aplies the stored values on a ship, or changes whole ship.
         spaceship getShip();
         void setChapter(int);
         int getChapter();
-
         void applyToShip(spaceship&); //adds or removes fuel & crew to the ship based on saved values
         friend std::ostream& operator<<(std::ostream& out, consequence cons);
-        //Void applyToCrew(Crew&); //removes or adds crew based on value
-        //void add(const consequence& other); // adds values from other consequence to current one
 };
 
 consequence::consequence(){
@@ -141,9 +138,9 @@ void consequence::applyToShip(spaceship& ship){
 }
 
 std::ostream& operator<<(std::ostream& out, consequence cons){
-    if(cons.getGetLose()){
+    if(cons.getGetLose() && (cons.getChangeCrew() > 0 || cons.getChangeFuel() > 0)){
         out << "Get ";
-    } else {
+    } else if (!cons.getGetLose() && (cons.getChangeCrew() > 0 || cons.getChangeFuel() > 0)){
         out << "lose ";
     }
 
@@ -164,9 +161,4 @@ std::ostream& operator<<(std::ostream& out, consequence cons){
     return out;
 }
 
-/*
-void consequence::add(consequence & other){
-
-}
-*/
 #endif

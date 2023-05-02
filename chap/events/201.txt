@@ -1,1 +1,3 @@
-result of chapter 2 option 1
+it was a trick!! bandits are now coming at you!
+fight them! @ if crew 5 lose crew 1 fuel -20 goto 20101
+run away! @ lose fuel 5 goto 20102

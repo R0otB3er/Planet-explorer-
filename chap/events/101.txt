@@ -1,0 +1,4 @@
+Upon analyzing you find that the minerals in the cave are perfect to synthesize fuel for your ship.
+analyze further @ if crew 5 goto 10101
+start extracting the minerals @ if crew 3 lose fuel 5 goto 102
+decide against extracting @ goto 1

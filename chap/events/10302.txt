@@ -1,0 +1,3 @@
+the plants and and fungi seem to be phosphorous based and not carbon based. you hear numerous clicking noises surrounding your crew.
+run away @ goto 10304
+investigate the noises @ goto 10303

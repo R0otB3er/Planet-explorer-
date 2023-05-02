@@ -1,0 +1,3 @@
+upon closer inspection the cave walls are mainly held together by the minerals and if disrupted too much the cave may collapse or start spewing lava.
+start extracting the minerals @ if crew 3 lose fuel 5 goto 102
+decide against extracting @ goto 1

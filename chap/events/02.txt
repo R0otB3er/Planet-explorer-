@@ -1,5 +1,3 @@
-chapter 2
-option 1 @ if crew 3 goto 201
-option 2 @ if fuel 25 lose crew 3 goto 2345
-option 3 @ add crew 3 goto 3456
-option 4 @ goto 4567
+Your crew finds a strange anomaly in the sand
+investigate further @ goto 201
+shoot the anomaly @ add fuel 30 goto 202

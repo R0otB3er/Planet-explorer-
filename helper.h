@@ -1,11 +1,12 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-#include "chapter.h"
 #include <string>
 #include <fstream>
 #include <iostream>
+
 using namespace std;
+
 void printTitle(){
 
     cout <<"              ,--,                                                 ,----," << endl;                                                                                                                                 
@@ -51,4 +52,17 @@ int getOptionChoice(){
     return stoi(stream);
 }
 
+//insterts a new line ~ every num charaters
+string insert_nlines(string& item, const int num){
+    for(int i = 1;i < item.size()/num; i++){
+        if (item[i * num] != ' '){
+            int j = 0;
+            while(item[(i * num) + j] != ' '){ j++;}
+            item.insert(item.begin() + (i * num) + j + 1, '\n');
+        } else {
+            item.insert(item.begin() + (i * num) + 1, '\n');
+        }
+    }
+    return item;
+}
 #endif

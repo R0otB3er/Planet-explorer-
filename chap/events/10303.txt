@@ -1,0 +1,4 @@
+your crew comes up upon a group of aliens that seem to have a reptilian ancestor, they have no eyes and dark black scales. clicking seems be both how they see and they communicate. they start approaching you.
+try to communicate @ goto 10306
+fight them @ lose crew 1 goto 10305
+run away @ goto 10304

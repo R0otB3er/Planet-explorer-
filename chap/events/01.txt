@@ -1,5 +1,4 @@
-chapter 1
-option 1 @ if crew 5 lose fuel 12 goto 2
-option 2 @ if fuel 25 lose crew 3 goto 2345
-option 3 @ add crew 3 goto 3456
-option 4 @ goto 4567
+The caves glimmer and shine from the new and almost foreign light showng just how mineral rich it is.
+analyze the minerals in the cave @ goto 101
+start extracting the minerals @ if crew 3 lose fuel 5 goto 102
+venture deeper into the system @ goto 103
